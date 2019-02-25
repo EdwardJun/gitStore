@@ -7,7 +7,8 @@ module.exports = smart(base, {
   plugins: [
     new webpack.DefinePlugin({
       'NODE_ENV': JSON.stringify('development')
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
     proxy: {
@@ -18,6 +19,7 @@ module.exports = smart(base, {
           '/api': ''
         }
       }
-    }
+    },
+    hot: true
   }
 })

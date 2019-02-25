@@ -6,7 +6,7 @@ let webpack = require('webpack')
 // let Happypack = require('happypack')
 
 module.exports = {
-  mode: 'production', // development  production
+  mode: 'development', // development  production
   entry: {
     index: './src/index.js'
   },
