@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { actionCreators } from './store'
 import {
   HeaderWrapper,
   Logo,
@@ -35,23 +36,25 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    focus: state.focus
+    // focus: state.header.focus
+    // focus: state.get('header').get('focus')
+    focus: state.getIn(['header', 'focus'])
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputFocus () {
-      const action = {
-        type: 'search_focus'
-      }
-      dispatch(action)
+      // const action = {
+      //   type: 'search_focus'
+      // }
+      dispatch(actionCreators.searchFocus())
     },
     handleInputBlur () {
-      const action = {
-        type: 'search_blur'
-      }
-      dispatch(action)
+      // const action = {
+      //   type: 'search_blur'
+      // }
+      dispatch(actionCreators.searchBlur())
     }
   }
 }
