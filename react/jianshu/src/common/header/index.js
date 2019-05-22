@@ -21,7 +21,7 @@ const Header = (props) => {
           <NavItem className="right">登录</NavItem>
           <NavItem className="right">Aa</NavItem>
           <SearchWrapper>
-            <NavSearch className={ this.props.focus ? 'active' : '' } onFocus ={this.props.handleInputFocus} onBlur={this.props.handleInputBlur}></NavSearch>
+            <NavSearch className={ props.focus ? 'active' : '' } onFocus ={ props.handleInputFocus } onBlur={ props.handleInputBlur }></NavSearch>
             <i className="iconfont">&#xe7d6;</i>
           </SearchWrapper>
         </Nav>
