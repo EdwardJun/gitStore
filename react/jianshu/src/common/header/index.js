@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
 import {
@@ -17,32 +17,32 @@ import {
   Button
 } from './style.js'
 
-const getListArea = (show) => {
-  if (show) {
-    return (
-      <SearchInfo>
-        <SearchInfoTitle>热门搜索
-          <SearchInfoSwitch>
-            <i className='iconfont'>&#xea29;</i>换一批
-          </SearchInfoSwitch>
-        </SearchInfoTitle>
-        <SearchInfoList>
-          <SearchInfoItem>区块链</SearchInfoItem>
-          <SearchInfoItem>小程序</SearchInfoItem>
-          <SearchInfoItem>VUE</SearchInfoItem>
-          <SearchInfoItem>React</SearchInfoItem>
-          <SearchInfoItem>毕业</SearchInfoItem>
-          <SearchInfoItem>故事</SearchInfoItem>
-          <SearchInfoItem>PHP</SearchInfoItem>
-        </SearchInfoList>
-      </SearchInfo>
-    )
-  } else {
-    return null
-  }
-}
-
-const Header = (props) => {
+class Header extends Component {
+  getListArea = (show) => {
+    if (show) {
+      return (
+        <SearchInfo>
+          <SearchInfoTitle>热门搜索
+            <SearchInfoSwitch>
+              <i className='iconfont'>&#xea29;</i>换一批
+            </SearchInfoSwitch>
+          </SearchInfoTitle>
+          <SearchInfoList>
+            <SearchInfoItem>区块链</SearchInfoItem>
+            <SearchInfoItem>小程序</SearchInfoItem>
+            <SearchInfoItem>VUE</SearchInfoItem>
+            <SearchInfoItem>React</SearchInfoItem>
+            <SearchInfoItem>毕业</SearchInfoItem>
+            <SearchInfoItem>故事</SearchInfoItem>
+            <SearchInfoItem>PHP</SearchInfoItem>
+          </SearchInfoList>
+        </SearchInfo>
+      )
+    } else {
+      return null
+    }
+  };
+  render () {
     return (
       <HeaderWrapper>
         <Logo></Logo>
@@ -52,9 +52,9 @@ const Header = (props) => {
           <NavItem className="right">登录</NavItem>
           <NavItem className="right">Aa</NavItem>
           <SearchWrapper>
-            <NavSearch className={ props.focus ? 'active' : '' } onFocus ={ props.handleInputFocus } onBlur={ props.handleInputBlur }></NavSearch>
+            <NavSearch className={ this.props.focus ? 'active' : '' } onFocus ={ this.props.handleInputFocus } onBlur={ this.props.handleInputBlur }></NavSearch>
             <i className="iconfont search-icon">&#xe7d6;</i>
-            { getListArea(props.focus) }
+            { this.getListArea(this.props.focus) }
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -63,6 +63,7 @@ const Header = (props) => {
         </Addition>
       </HeaderWrapper>
     )
+  }
 }
 
 const mapStateToProps = (state) => {
