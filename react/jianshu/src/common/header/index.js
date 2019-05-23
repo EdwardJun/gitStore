@@ -8,9 +8,39 @@ import {
   NavItem,
   SearchWrapper,
   NavSearch,
+  SearchInfo,
+  SearchInfoTitle,
+  SearchInfoSwitch,
+  SearchInfoList,
+  SearchInfoItem,
   Addition,
   Button
 } from './style.js'
+
+const getListArea = (show) => {
+  if (show) {
+    return (
+      <SearchInfo>
+        <SearchInfoTitle>热门搜索
+          <SearchInfoSwitch>
+            <i className='iconfont'>&#xea29;</i>换一批
+          </SearchInfoSwitch>
+        </SearchInfoTitle>
+        <SearchInfoList>
+          <SearchInfoItem>区块链</SearchInfoItem>
+          <SearchInfoItem>小程序</SearchInfoItem>
+          <SearchInfoItem>VUE</SearchInfoItem>
+          <SearchInfoItem>React</SearchInfoItem>
+          <SearchInfoItem>毕业</SearchInfoItem>
+          <SearchInfoItem>故事</SearchInfoItem>
+          <SearchInfoItem>PHP</SearchInfoItem>
+        </SearchInfoList>
+      </SearchInfo>
+    )
+  } else {
+    return null
+  }
+}
 
 const Header = (props) => {
     return (
@@ -23,7 +53,8 @@ const Header = (props) => {
           <NavItem className="right">Aa</NavItem>
           <SearchWrapper>
             <NavSearch className={ props.focus ? 'active' : '' } onFocus ={ props.handleInputFocus } onBlur={ props.handleInputBlur }></NavSearch>
-            <i className="iconfont">&#xe7d6;</i>
+            <i className="iconfont search-icon">&#xe7d6;</i>
+            { getListArea(props.focus) }
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -36,8 +67,6 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    // focus: state.header.focus
-    // focus: state.get('header').get('focus')
     focus: state.getIn(['header', 'focus'])
   }
 }
@@ -45,19 +74,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputFocus () {
-      // const action = {
-      //   type: 'search_focus'
-      // }
       dispatch(actionCreators.searchFocus())
     },
     handleInputBlur () {
-      // const action = {
-      //   type: 'search_blur'
-      // }
       dispatch(actionCreators.searchBlur())
     }
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
-// export default Header

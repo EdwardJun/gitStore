@@ -60,7 +60,7 @@ export const SearchWrapper = styled.div`
             color: #fff;
         }
     } */
-    .iconfont {
+    .search-icon {
       position: absolute;
       top: 50%;
       right: 12px;
