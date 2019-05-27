@@ -18,8 +18,8 @@ import {
 } from './style.js'
 
 class Header extends Component {
-  getListArea = (show) => {
-    if (show) {
+  getListArea = () => {
+    if (this.props.focus) {
       return (
         <SearchInfo>
           <SearchInfoTitle>热门搜索
@@ -28,13 +28,11 @@ class Header extends Component {
             </SearchInfoSwitch>
           </SearchInfoTitle>
           <SearchInfoList>
-            <SearchInfoItem>区块链</SearchInfoItem>
-            <SearchInfoItem>小程序</SearchInfoItem>
-            <SearchInfoItem>VUE</SearchInfoItem>
-            <SearchInfoItem>React</SearchInfoItem>
-            <SearchInfoItem>毕业</SearchInfoItem>
-            <SearchInfoItem>故事</SearchInfoItem>
-            <SearchInfoItem>PHP</SearchInfoItem>
+            {
+              this.props.list.map((item) => {
+                return <SearchInfoItem key={ item }>{ item }</SearchInfoItem>
+              })
+            }
           </SearchInfoList>
         </SearchInfo>
       )
@@ -54,7 +52,7 @@ class Header extends Component {
           <SearchWrapper>
             <NavSearch className={ this.props.focus ? 'active' : '' } onFocus ={ this.props.handleInputFocus } onBlur={ this.props.handleInputBlur }></NavSearch>
             <i className="iconfont search-icon">&#xe7d6;</i>
-            { this.getListArea(this.props.focus) }
+            { this.getListArea() }
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -68,13 +66,15 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    focus: state.getIn(['header', 'focus'])
+    focus: state.getIn(['header', 'focus']),
+    list: state.getIn(['header', 'list'])
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputFocus () {
+      dispatch(actionCreators.getList())
       dispatch(actionCreators.searchFocus())
     },
     handleInputBlur () {
