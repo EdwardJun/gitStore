@@ -26,15 +26,15 @@ export const getList = () => {
     //   console.log('error')
     // })
     axios({
-      method: 'get',
-      url: 'api/headerList.json',
-      // headers: {
-      //   Accept: "text/html; charset=UTF-8"
-      // }
+      method: 'GET',
+      url: '/apiTest/trending_search',
+      headers: {
+        Accept: "*/*"
+      }
     }).then((res) => {
       console.log(res)
       const data = res.data
-      dispatch(changeList(data.data))
+      dispatch(changeList(data))
     }).catch((err) => {
       console.log(err)
     })
