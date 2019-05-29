@@ -1,6 +1,7 @@
 import * as constants from './constants.js'
 import { fromJS } from 'immutable'
-import axios from 'axios'
+// import axios from 'axios'
+import service from '../../../utils/_axios.js'
 
 //加括号的函数体返回对象字面表达式：
 export const searchFocus = () => ({
@@ -25,15 +26,15 @@ export const getList = () => {
     // }).catch(() => {
     //   console.log('error')
     // })
-    axios({
+    service({
       method: 'GET',
       url: '/apiTest/trending_search',
-      headers: {
-        Accept: "*/*"
-      }
+      // headers: {
+      //   Accept: "*/*"
+      // }
     }).then((res) => {
       console.log(res)
-      const data = res.data
+      const data = res
       dispatch(changeList(data))
     }).catch((err) => {
       console.log(err)
