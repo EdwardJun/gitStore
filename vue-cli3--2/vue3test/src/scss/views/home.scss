@@ -4,7 +4,13 @@
     color: #ccc;
   }
   .testImg {
-    width: 50px;
+    width: 100px;
     height: 50px;
+  }
+  .test-border {
+    width: 100%;
+    height: 1px;
+    background-color: red;
+    transform: scaleY(.5);
   }
 }

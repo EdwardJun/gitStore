@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>vue3test</title>
-    <script src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js"></script>
+    <script src="./lib/viewport-units-buggyfill.min.js"></script>
   </head>
   <body>
     <noscript>
@@ -15,11 +15,9 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
     <script>
-      window.onload = function() {
-        console.log('1111111111')
-        window.viewportUnitsBuggyfill.init({
-          hacks: window.viewportUnitsBuggyfillHacks
-        });
+      // vw兼容性处理viewport-units-buggyfill
+      window.onload = function () {
+        window.viewportUnitsBuggyfill.init({ hacks: window.viewportUnitsBuggyfillHacks });
       }
     </script>
   </body>

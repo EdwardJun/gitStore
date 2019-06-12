@@ -1,9 +1,8 @@
 const path = require('path')
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
-
+console.log(process.env.NODE_ENV)
+console.log(process.env.VUE_APP_BASE_URL)
+const isBuild = process.env.NODE_ENV === 'production'
 module.exports = {
   //部署应用包时的基本 URL
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
@@ -16,7 +15,7 @@ module.exports = {
   //是否使用包含运行时编译器的 Vue 构建版本。设置true后你就可以在使用template
   // runtimeCompiler: true,
   // 生产环境是否生成 sourceMap 文件 sourceMap的详解请看末尾  
-  productionSourceMap: false,
+  productionSourceMap: !isBuild,
 
    // css相关配置
    css: {
@@ -25,7 +24,12 @@ module.exports = {
     // 开启 CSS source maps?
     sourceMap: true,
     // css预设器配置项
-    loaderOptions: {},
+    loaderOptions: {
+      css: {
+        localIdentName: '[name]-[hash]',
+        camelCase: 'only'
+      }
+    },
     // 启用 CSS modules for all css / pre-processor files.
     modules: false
   },
