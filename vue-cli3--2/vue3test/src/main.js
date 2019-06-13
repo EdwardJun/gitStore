@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './plugins/axios'
+import axios from './plugins/axios'
 import router from './router.js'
 import './scss/common/index.scss'
 import { Button, Icon, Popup } from 'vant'
+
+Vue.prototype.$axios = axios
 
 Vue.use(Button)
 Vue.use(Icon)

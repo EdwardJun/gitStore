@@ -3,6 +3,11 @@ const path = require('path')
 console.log(process.env.NODE_ENV)
 console.log(process.env.VUE_APP_BASE_URL)
 const isBuild = process.env.NODE_ENV === 'production'
+
+function resolve (dir) {
+  return path.join(__dirname, './', dir)
+}
+
 module.exports = {
   //部署应用包时的基本 URL
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
@@ -17,8 +22,14 @@ module.exports = {
   // 生产环境是否生成 sourceMap 文件 sourceMap的详解请看末尾  
   productionSourceMap: !isBuild,
 
-   // css相关配置
-   css: {
+  chainWebpack: config => {
+    // 为src下文件配别名
+    config.resolve.alias
+      .set('@', resolve('src'))
+  },
+
+  // css相关配置
+  css: {
     // 是否使用css分离插件 ExtractTextPlugin 生产环境下是true,开发环境下是false
     extract: false,
     // 开启 CSS source maps?
@@ -33,6 +44,7 @@ module.exports = {
     // 启用 CSS modules for all css / pre-processor files.
     modules: false
   },
+
   // webpack-dev-server 相关配置
   devServer: { // 设置代理
     hot: true, //热加载
@@ -42,10 +54,13 @@ module.exports = {
     open: false, //自动打开浏览器
     proxy: {
       '/api': { //本地                                        
-        target: '',
+        target: 'https://www.jianshu.com',
         // 如果要代理 websockets
         ws: false,
-        changeOrigin: true
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api": "/"
+        }
       }
     }
   }
